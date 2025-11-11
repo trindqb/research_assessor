@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tự Đánh Giá NCKH</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>🛠️ Tự Đánh Giá Năng Lực Nghiên Cứu & Công Bố</h1>
+        <p class="instruction">Hãy tự đánh giá mức độ đồng ý hoặc khả năng thực hiện của mình bằng cách chọn một nút điểm (0-4) cho mỗi câu hỏi.</p>
+
+        <div id="scoreKey">
+            <h3>🔑 Ý Nghĩa Thang Điểm Tự Đánh Giá (0 đến 4)</h3>
+            <div class="score-grid">
+                <div class="score-item"><strong>0 Điểm:</strong> Hoàn toàn không biết / Chưa từng làm.</div>
+                <div class="score-item"><strong>1 Điểm:</strong> Đã nghe qua / Đã từng làm nhưng chưa thành công.</div>
+                <div class="score-item"><strong>2 Điểm:</strong> Hiểu rõ khái niệm / Đã từng thực hiện với sự hỗ trợ.</div>
+                <div class="score-item"><strong>3 Điểm:</strong> Tự tin thực hiện độc lập / Đã có kết quả.</div>
+                <div class="score-item"><strong>4 Điểm:</strong> Có thể hướng dẫn người khác / Có nhiều công bố thành công.</div>
+            </div>
+        </div>
+        <form id="assessmentForm">
+            <div id="scoresStore" style="display:none;">
+                <input type="hidden" id="q1_score" value="0">
+                <input type="hidden" id="q2_score" value="0">
+                <input type="hidden" id="q3_score" value="0">
+                <input type="hidden" id="q4_score" value="0">
+                <input type="hidden" id="q5_score" value="0">
+                <input type="hidden" id="q6_score" value="0">
+                <input type="hidden" id="q7_score" value="0">
+                <input type="hidden" id="q8_score" value="0">
+                <input type="hidden" id="q9_score" value="0">
+                <input type="hidden" id="q10_score" value="0">
+            </div>
+
+            <script>
+                // Hàm JS để tạo nhóm nút điểm cho mỗi câu hỏi
+                function createScoreButtons(questionId) {
+                    let buttonsHTML = '<div class="score-buttons" id="' + questionId + '_buttons">';
+                    for (let i = 0; i <= 4; i++) {
+                        // Nút 0 sẽ được chọn mặc định
+                        const isDefault = i === 0 ? ' selected' : ''; 
+                        buttonsHTML += `<button type="button" class="score-btn${isDefault}" data-question="${questionId}" data-value="${i}">${i}</button>`;
+                    }
+                    buttonsHTML += '</div>';
+                    return buttonsHTML;
+                }
+            </script>
+            
+            <h2>I. Kiến thức Cơ bản về Công bố (Max: 16 điểm)</h2>
+            <div class="question-group">
+                <div class="question-row">
+                    <label>1. Tôi có thể <strong>phân biệt</strong> được tạp chí chuyên ngành trong nước với tạp chí quốc tế (Scopus/WoS) và tạp chí giả.</label>
+                    <script>document.write(createScoreButtons('q1'));</script>
+                </div>
+                <div class="question-row">
+                    <label>2. Tôi <strong>hiểu rõ</strong> ý nghĩa của các chỉ số Impact Factor (IF), Quartile (Q1-Q4) và biết cách tra cứu chúng.</label>
+                    <script>document.write(createScoreButtons('q2'));</script>
+                </div>
+                <div class="question-row">
+                    <label>3. Tôi nắm được <strong>cấu trúc IMRAD</strong> và các yêu cầu cơ bản về nội dung của từng phần.</label>
+                    <script>document.write(createScoreButtons('q3'));</script>
+                </div>
+                 <div class="question-row">
+                    <label>4. Tôi biết cách sử dụng <strong>phần mềm quản lý trích dẫn</strong> (như Mendeley, Zotero) để đảm bảo tính chính xác cho tài liệu tham khảo.</label>
+                    <script>document.write(createScoreButtons('q4'));</script>
+                </div>
+            </div>
+
+            <h2>II. Kinh nghiệm Thực hành Nghiên cứu (Max: 16 điểm)</h2>
+            <div class="question-group">
+                <div class="question-row">
+                    <label>5. Tôi có thể <strong>xác định</strong> một khoảng trống nghiên cứu (Research Gap) và đặt ra một vấn đề nghiên cứu khả thi, rõ ràng.</label>
+                    <script>document.write(createScoreButtons('q5'));</script>
+                </div>
+                <div class="question-row">
+                    <label>6. Tôi có kinh nghiệm thực hiện <strong>phân tích số liệu hoặc xử lý dữ liệu</strong> cần thiết cho lĩnh vực của mình.</label>
+                    <script>document.write(createScoreButtons('q6'));</script>
+                </div>
+                <div class="question-row">
+                    <label>7. Tôi có thể tự mình <strong>viết một bản nháp bài báo</strong> hoàn chỉnh, logic và không mắc lỗi đạo văn nghiêm trọng.</label>
+                    <script>document.write(createScoreButtons('q7'));</script>
+                </div>
+                <div class="question-row">
+                    <label>8. Tôi đã có kinh nghiệm <strong>gửi bài báo đến tạp chí/hội nghị</strong> và xử lý quy trình phản biện.</label>
+                    <script>document.write(createScoreButtons('q8'));</script>
+                </div>
+            </div>
+            
+             <h2>III. Kết quả và Tham vọng (Max: 8 điểm)</h2>
+            <div class="question-group">
+                <div class="question-row">
+                    <label>9. Tôi đã có <strong>ít nhất 1 công bố</strong> trên tạp chí/hội nghị uy tín (cấp Bộ/Trường trở lên) trong 3 năm gần nhất.</label>
+                    <script>document.write(createScoreButtons('q9'));</script>
+                </div>
+                <div class="question-row">
+                    <label>10. Tôi đang có <strong>một đề tài nghiên cứu đang tiến hành</strong> và dự kiến công bố quốc tế trong 12 tháng tới.</label>
+                    <script>document.write(createScoreButtons('q10'));</script>
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn">Xác Định Cấp Độ NCKH Của Tôi</button>
+        </form>
+
+        <div id="resultContainer" class="result-hidden">
+            <h2>🎉 KẾT QUẢ TỰ ĐÁNH GIÁ</h2>
+            <p><strong>Tổng Điểm:</strong> <span id="totalScore"></span>/40</p>
+            <div id="levelDisplay">
+                <p><strong>Cấp Độ Hiện Tại:</strong> <span id="levelName" class="level-name"></span></p>
+                <p><strong>Định Hướng Ưu Tiên:</strong> <span id="guidance"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

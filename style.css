@@ -1,0 +1,198 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #004d40;
+    text-align: center;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 10px;
+}
+
+h2 {
+    color: #00796b;
+    margin-top: 25px;
+    padding-left: 10px;
+    border-left: 5px solid #004d40;
+}
+
+.instruction {
+    text-align: center;
+    font-style: italic;
+    margin-bottom: 30px;
+    color: #666;
+}
+
+/* Kiểu dáng cho từng câu hỏi */
+.question-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px dashed #eee;
+}
+
+.question-row:last-child {
+    border-bottom: none;
+}
+
+.question-row label {
+    flex-basis: 80%; /* Chiếm phần lớn không gian cho nội dung câu hỏi */
+    padding-right: 15px;
+}
+
+.score-input {
+    flex-basis: 15%; /* Ô nhập điểm nhỏ hơn */
+    width: 60px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+/* Nút Submit */
+#submitBtn {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 30px;
+    background-color: #00796b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#submitBtn:hover {
+    background-color: #004d40;
+}
+
+/* Khung Kết quả */
+#resultContainer {
+    margin-top: 40px;
+    padding: 20px;
+    border: 2px solid #ff9800;
+    border-radius: 5px;
+    background-color: #fff3e0;
+}
+
+.result-hidden {
+    display: none; /* Ban đầu ẩn khung kết quả */
+}
+
+#levelDisplay {
+    padding: 15px;
+    background-color: #ffe0b2;
+    border-radius: 4px;
+}
+
+.level-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #d84315; /* Màu nổi bật cho tên cấp độ */
+}
+/* ... (Giữ nguyên các quy tắc CSS cũ) ... */
+
+/* Kiểu dáng cho nhóm nút điểm */
+.score-buttons {
+    display: flex;
+    gap: 5px; /* Tăng khoảng cách giữa các nút điểm */
+    flex-basis: 35%; /* Tăng phần không gian cho nút điểm */
+    justify-content: flex-end; 
+}
+
+.score-btn {
+    /* Tăng kích thước nút */
+    padding: 8px 12px; 
+    width: 35px; /* Đảm bảo chiều rộng đồng nhất */
+    height: 35px; /* Đảm bảo chiều cao đồng nhất */
+    
+    border: 1px solid #00796b; /* Viền màu xanh lục */
+    background-color: #e0f2f1; /* Nền xanh lục nhạt */
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 6px; /* Bo tròn hơn */
+    font-size: 1em; /* Kích thước chữ lớn hơn */
+    font-weight: bold;
+    color: #004d40;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.score-btn:hover:not(.selected) {
+    background-color: #b2dfdb; /* Thay đổi màu khi di chuột */
+}
+
+/* Kiểu dáng cho nút điểm ĐÃ CHỌN */
+.score-btn.selected {
+    background-color: #004d40; /* Màu xanh đậm nổi bật */
+    color: white;
+    border-color: #004d40;
+    box-shadow: 0 0 5px rgba(0, 77, 64, 0.5); /* Thêm hiệu ứng bóng */
+}
+
+/* Cập nhật lại .question-row để căn chỉnh */
+.question-row label {
+    flex-basis: 65%; /* Giảm phần label để chứa vừa nút lớn hơn */
+    padding-right: 15px;
+}
+
+/* ... (Giữ nguyên các quy tắc CSS cũ) ... */
+
+/* Kiểu dáng cho Khung Mô tả Thang Điểm */
+#scoreKey {
+    margin: 20px 0;
+    padding: 15px;
+    background-color: #f7fcfb;
+    border: 1px dashed #00796b;
+    border-radius: 6px;
+}
+
+#scoreKey h3 {
+    color: #004d40;
+    margin-top: 0;
+    font-size: 1.1em;
+    text-align: center;
+    padding-bottom: 5px;
+}
+
+.score-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap; /* Cho phép xuống dòng trên màn hình nhỏ */
+}
+
+.score-item {
+    flex: 1; /* Chia đều không gian */
+    min-width: 150px; /* Đảm bảo hiển thị đủ trên màn hình nhỏ */
+    padding: 5px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #ffffff;
+    font-size: 0.9em;
+}
+
+/* Cập nhật lại .question-row để căn chỉnh sau khi thêm scoreKey */
+.question-row label {
+    flex-basis: 65%; 
+    padding-right: 15px;
+}
