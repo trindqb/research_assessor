@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // 3. Hiển thị Kết quả
         document.getElementById('totalScore').textContent = totalScore;
         document.getElementById('levelName').textContent = levelName;
-        document.getElementById('guidance').textContent = guidance;
+        document.getElementById('guidance').innerHTML = guidance;
         
         const resultContainer = document.getElementById('resultContainer');
         resultContainer.classList.remove('result-hidden');
