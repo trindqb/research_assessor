@@ -67,3 +67,81 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// ĐỐI TƯỢNG CHỨA MÔ TẢ CHO TỪNG ĐIỂM
+const SCORE_DESCRIPTIONS = {
+    0: "0 Điểm: Hoàn toàn không biết / Chưa từng làm.",
+    1: "1 Điểm: Đã nghe qua / Đã từng làm nhưng chưa thành công.",
+    2: "2 Điểm: Hiểu rõ khái niệm / Đã từng thực hiện với sự hỗ trợ.",
+    3: "3 Điểm: Tự tin thực hiện độc lập / Đã có kết quả.",
+    4: "4 Điểm: Có thể hướng dẫn người khác / Có nhiều công bố thành công."
+};
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const scoreButtons = document.querySelectorAll('.score-btn');
+    
+    scoreButtons.forEach(button => {
+        // Áp dụng sự kiện click cho các nút
+        button.addEventListener('click', function() {
+            const questionId = this.getAttribute('data-question'); 
+            const scoreValue = parseInt(this.getAttribute('data-value')); 
+            
+            // 1. Cập nhật trạng thái "selected" (phản hồi trực quan)
+            const parentDiv = document.getElementById(questionId + '_buttons');
+            parentDiv.querySelectorAll('.score-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            this.classList.add('selected');
+
+            // 2. Cập nhật giá trị vào ô ẩn
+            document.getElementById(questionId + '_score').value = scoreValue;
+
+            // 3. HIỂN THỊ MÔ TẢ ĐIỂM ĐÃ CHỌN
+            const feedbackElement = document.getElementById(questionId + '_feedback');
+            feedbackElement.textContent = SCORE_DESCRIPTIONS[scoreValue];
+        });
+    });
+
+    // --- LOGIC Xử lý Submit Form (Giữ nguyên) ---
+    document.getElementById('assessmentForm').addEventListener('submit', function(e) {
+        e.preventDefault(); 
+
+        const scoreInputs = document.querySelectorAll('#scoresStore input[type="hidden"]');
+        let totalScore = 0;
+
+        scoreInputs.forEach(input => {
+            let score = parseInt(input.value);
+            if (!isNaN(score) && score >= 0 && score <= 4) {
+                 totalScore += score;
+            }
+        });
+
+        // 2. Phân loại Cấp độ và Định hướng
+        let levelName = "";
+        let guidance = "";
+
+        if (totalScore < 10) {
+            levelName = "0 - Người Bắt Đầu (The Novice)";
+            guidance = "Tập trung vào <strong>Kiến thức Cơ bản</strong> (Phân biệt tạp chí, chỉ số IF/Q) và tìm kiếm <strong>Mentor</strong> cá nhân.";
+        } else if (totalScore <= 20) {
+            levelName = "1 - Người Học Việc (The Apprentice)";
+            guidance = "Tập trung vào <strong>Viết và Công bố Trong nước</strong> (Tạp chí chuyên ngành). Tham gia <strong>Nhóm Viết Bài (Writing Group)</strong>.";
+        } else if (totalScore <= 30) {
+            levelName = "2 - Người Hành Nghề (The Practitioner)";
+            guidance = "Tập trung vào <strong>Chiến lược Công bố Quốc tế (Q4/Q3)</strong> và rèn luyện kỹ năng <strong>phản hồi phản biện</strong> chuyên sâu.";
+        } else { // totalScore > 30
+            levelName = "3 & 4 - Nhà Lãnh Đạo Nghiên Cứu (The Leader)";
+            guidance = "Tập trung vào công bố <strong>Q2/Q1</strong> và <strong>dẫn dắt nhóm nghiên cứu</strong> trẻ hơn, tìm kiếm các dự án/tài trợ lớn.";
+        }
+
+        // 3. Hiển thị Kết quả
+        document.getElementById('totalScore').textContent = totalScore;
+        document.getElementById('levelName').textContent = levelName;
+        document.getElementById('guidance').innerHTML = guidance; 
+        
+        const resultContainer = document.getElementById('resultContainer');
+        resultContainer.classList.remove('result-hidden');
+        
+        resultContainer.scrollIntoView({ behavior: 'smooth' });
+    });
+});
